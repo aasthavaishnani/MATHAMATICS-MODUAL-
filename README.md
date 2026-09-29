@@ -1,96 +1,73 @@
-# Spread Locator: A Statistical Distribution Analysis Model
+# Inferential Statistics & Hypothesis Testing Analysis
 
 ## Project Overview
-**Spread Locator** is a comprehensive statistical analysis project designed to model and evaluate health check-up metrics across individuals. This project combines theoretical foundations of probability distributions with practical data analysis and statistical hypothesis testing using Python.
+This project focuses on the implementation and analysis of **Inferential Statistics** and **Hypothesis Testing**. It covers fundamental statistical principles, hypothesis formulation, probability metrics, error analysis, and parametric/non-parametric tests to draw conclusions about population parameters from sample data.
 
 ---
 
-# Part A - Theoretical Foundation
+# Theoretical Framework & Concepts
 
-### 1. What is a Statistical Distribution?
-A statistical distribution is a mathematical function that describes the probabilities of occurrence of different possible outcomes for a random variable. It shows how data values are spread across their range, providing essential insights into central tendency, variability, skewness, and overall structural pattern.
-
----
-
-### 2. What is a Q-Q Plot and why is it used?
-A Q-Q (Quantile-Quantile) plot is a visual diagnostic tool used to assess whether a sample dataset follows a specific theoretical distribution, most commonly the Normal Distribution. It plots sample quantiles against corresponding theoretical standard normal quantiles.
-* **Why it is used:** It visually verifies the assumption of normality. If data follows the theoretical distribution, points fall closely along the 45-degree reference line ($y = x$). Deviations or S-shapes indicate heavy tails, light tails, or skewness.
+### 1. Inferential Statistics
+Inferential statistics allows us to study sample data and make conclusions or predictions about a larger population. It uses probability principles to make decisions when collecting data from every individual in a population is not feasible.
 
 ---
 
-### 3. Difference between Discrete and Continuous Distributions
+### 2. Hypothesis Testing & Components
+Hypothesis testing is a structured statistical method to determine if there is sufficient evidence in a sample to support a specific claim about a population.
 
-| Feature | Discrete Distribution | Continuous Distribution |
+* **Null Hypothesis ($H_0$):** The default assumption that there is no effect, no difference, or no relationship between variables.
+* **Alternative Hypothesis ($H_1$ or $H_a$):** The claim that there is a significant effect, difference, or relationship. Accepted when $H_0$ is rejected.
+
+---
+
+### 3. Confidence Interval & Critical Value
+* **Confidence Interval (CI):** An estimated range of values likely to contain the true population parameter (e.g., a 95% Confidence Interval).
+* **Critical Value:** The threshold value determined by the significance level ($\alpha$) that separates the acceptance region from the rejection region of $H_0$.
+
+---
+
+### 4. P-Value Analysis
+The **P-value** measures the probability of obtaining test results at least as extreme as the observed results, assuming the null hypothesis is true.
+
+* **$p \le 0.05$:** Strong evidence against $H_0 \rightarrow$ Reject $H_0$.
+* **$p > 0.05$:** Insufficient evidence against $H_0 \rightarrow$ Fail to reject $H_0$.
+
+---
+
+### 5. Type I and Type II Errors
+
+| Error Type | Decision | Real Condition | Description |
+| :--- | :--- | :--- | :--- |
+| **Type I Error ($\alpha$)** | Reject $H_0$ | $H_0$ is True | **False Positive:** Concluding an effect exists when it does not. |
+| **Type II Error ($\beta$)** | Fail to Reject $H_0$ | $H_0$ is False | **False Negative:** Failing to detect an effect that actually exists. |
+
+---
+
+### 6. Summary of Statistical Tests
+
+| Statistical Test | Best Used For | Sample Size / Conditions |
 | :--- | :--- | :--- |
-| **Definition** | Models random variables taking distinct, separate, and countable outcomes. | Models random variables taking any real value within a continuous range. |
-| **Data Values** | Whole numbers or countable values ($0, 1, 2, 3$). | Continuous real numbers ($10.5, 100.75, 499.99$). |
-| **Measurement Function** | Probability Mass Function (PMF): $P(X = x)$. | Probability Density Function (PDF): $P(a \le X \le b)$. |
-| **Example** | Number of doctor visits made by a patient in a month. | Patient's exact weight or fasting glucose level. |
+| **Z-Test** | Comparing population means | Large samples ($n \ge 30$) with known population variance. |
+| **T-Test** | Comparing means of 1 or 2 groups | Small samples ($n < 30$) or unknown population variance. |
+| **Chi-Square Test ($\chi^2$)** | Categorical variable independence | Categorical data, comparing observed vs. expected frequencies. |
+| **ANOVA** | Comparing means across $3+$ groups | Numerical data across multiple independent groups simultaneously. |
 
 ---
 
-### 4. What is Bernoulli Distribution?
-The Bernoulli distribution is a discrete probability distribution for a single trial with exactly two mutually exclusive outcomes: "Success" ($1$) and "Failure" ($0$).
-* **Parameters:** $p$ (probability of success) and $q = 1 - p$ (probability of failure).
-* **PMF Formula:** $P(X = k) = p^k (1-p)^{1-k} \quad \text{for } k \in \{0, 1\}$
-* **Example:** Individual diabetes diagnostic status (`diabetes = True` as $1$, `diabetes = False` as $0$).
+### 7. Covariance vs. Correlation
 
----
+#### **Covariance**
+Measures the direction of a linear relationship between two variables.
+* **Positive:** Variables increase or decrease together.
+* **Negative:** One variable increases while the other decreases.
+* **Near Zero:** No linear relationship.
+*(Note: Covariance indicates direction but not the strength of the relationship.)*
 
-### 5. What is Binomial Distribution?
-The Binomial distribution models the number of successes in a fixed number ($n$) of independent Bernoulli trials with constant success probability ($p$).
-* **Parameters:** $n$ (total trials) and $p$ (success probability).
-* **PMF Formula:** 
-  $$P(X = k) = \binom{n}{k} p^k (1-p)^{n-k} \quad \text{for } k = 0, 1, 2, \dots, n$$
-* **Example:** Total number of patients diagnosed with hypertension out of 10 random clinic check-ups.
-
----
-
-### 6. Explain Log-Normal Distribution
-A Log-Normal distribution is a continuous distribution of a random variable whose natural logarithm is normally distributed. If $X$ is Log-Normal, then $Y = \ln(X)$ follows a Normal Distribution.
-* **Key Characteristics:** Strictly positive ($X > 0$), right-skewed with a long right tail.
-* **Example:** Patient fasting glucose levels or medical billing amounts where high values create a right-skewed tail.
-
----
-
-### 7. Explain Power Law Distribution
-A Power Law distribution is a continuous distribution where a relative change in one quantity produces a proportional relative change in another ($Y = c \cdot X^{-\alpha}$).
-* **Key Characteristics:** Features extreme heavy tails and represents Pareto-style scaling dynamics.
-* **Example:** Occurrence of rare severe healthcare complications across a population.
-
----
-
-### 8. What is Box-Cox Transform?
-The Box-Cox transformation is a parametric power transformation used to transform non-normal, skewed positive data into a distribution that closely approximates normality and stabilizes variance.
-* **Formula:**
-  $$y^{(\lambda)} = \begin{cases} \frac{y^\lambda - 1}{\lambda} & \text{if } \lambda \neq 0 \\ \ln(y) & \text{if } \lambda = 0 \end{cases}$$
-* **Constraint:** Requires all input data values to be strictly positive ($y > 0$).
-
----
-
-### 9. Explain Poisson Distribution with an Example
-The Poisson distribution is a discrete probability distribution expressing the likelihood of a given number of independent events occurring within a fixed interval of time or space.
-* **Key Assumptions:** Events occur independently at a constant average rate ($\lambda$).
-* **PMF Formula:**
-  $$P(X = k) = \frac{\lambda^k e^{-\lambda}}{k!} \quad \text{for } k = 0, 1, 2, \dots$$
-* **Example:** Modeling the number of patients arriving at an emergency clinic per hour with an average arrival rate of $\lambda = 15$ patients/hour.
-
----
-
-### 10. What is Z-score Probability?
-A Z-score measures how many standard deviations ($\sigma$) a specific value ($x$) lies away from the population mean ($\mu$).
-* **Formula:** $Z = \frac{x - \mu}{\sigma}$
-* **Z-score Probability:** Cumulative standard normal probability associated with a calculated Z-score, used to find probabilities above/below critical health thresholds (e.g., $P(\text{blood\_pressure} > 140)$).
-
----
-
-### 11. Differentiate Probability Density Function (PDF) and Cumulative Distribution Function (CDF)
-
-| Feature | Probability Density Function (PDF) | Cumulative Distribution Function (CDF) |
-| :--- | :--- | :--- |
-| **Definition** | Relative likelihood density of a continuous variable taking a specific value. | Total cumulative probability that a random variable is less than or equal to a value ($X \le x$). |
-| **Output Range** | Non-negative real values ($f(x) \ge 0$). | Strictly bounded between $0$ and $1$ ($0\% \le F(x) \le 100\%$). |
-| **Interpretation** | Highlights peaks where observations are concentrated. | Shows accumulated percentage of data up to point $x$. |
+#### **Correlation ($r$)**
+Measures both the **strength and direction** of a linear relationship on a scale from $-1$ to $+1$.
+* **$+1$:** Perfect positive linear relationship.
+* **$-1$:** Perfect negative linear relationship.
+* **$0$:** No linear relationship.
 
 ---
 
