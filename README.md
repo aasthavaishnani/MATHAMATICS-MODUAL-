@@ -141,13 +141,6 @@ The project uses a synthetic medical health record dataset structured with the f
 
 ---
 
-## Confidence Intervals & Metrics
-* **95% Confidence Interval Formula:**
-  $$\text{CI} = \bar{x} \pm t_{\alpha/2, df} \times \left(\frac{s}{\sqrt{n}}\right)$$
-* Evaluated 95% CIs for `age`, `weight`, `bmi`, and `glucose_level`.
-
----
-
 ## Tech Stack & Dependencies
 
 * **Language:** Python 3.x
