@@ -131,8 +131,7 @@ The project uses a synthetic medical health record dataset structured with the f
 
 ## How to Run
 
-1. Clone the repository:
+1. Clone this repository:
    ```bash
-   git clone [https://github.com/YOUR_USERNAME/Spread-Locator.git](https://github.com/YOUR_USERNAME/Spread-Locator.git)
-   cd Spread-Locator
-   
+   git clone [https://github.com/YOUR_USERNAME/YOUR_REPOSITORY.git](https://github.com/YOUR_USERNAME/YOUR_REPOSITORY.git)
+   cd YOUR_REPOSITORY
